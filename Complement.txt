@@ -1,0 +1,73 @@
+public class subtraction {
+	public static void main(String[]args){
+	    Scanner sc = new Scanner(System.in);
+	    
+	    int minuend = 0, subtrahend = 0;
+	    boolean minTrue = false, subTrue = false;
+	    do{
+	        System.out.print("Enter the minuend: ");
+	        try{
+	        	minuend = sc.nextInt();
+	        	minTrue = true;
+	        }catch (Exception e){
+	        	System.err.println("Please enter an INTEGER.");
+	        	sc.next();
+	        	continue;
+	        }
+	    }while(!minTrue);
+	    
+	    do{
+	        System.out.print("Enter the subtrahend: ");
+	        try{
+	            subtrahend = sc.nextInt(); 
+	            subTrue = true;
+	        }catch (Exception e){
+	            System.err.println("Please enter an INTEGER.");
+	            sc.next();
+	            continue;
+	        }
+	    }while(!subTrue);
+	    
+	    System.out.println("Answer: "+findDifference(minuend,subtrahend));
+	  }
+	
+	public static int findDifference(int minuend, int subtrahend){
+		int difference = 0;
+		if (subtrahend < minuend || subtrahend == minuend){
+	      if(subtrahend < 0){
+	        String sub = subtrahend+"";
+	        int newSubtrahend = Integer.parseInt(sub.substring(1));
+	        difference = (minuend+newSubtrahend); 
+	      }else{
+	        difference = findDifferenceProper(minuend, subtrahend);
+	      }
+	    }else{
+	      if(minuend < 0){
+	        String min = minuend+"";
+	        int newMinuend = Integer.parseInt(min.substring(1));
+	        difference = Integer.parseInt("-"+(newMinuend+subtrahend)); 
+	      }else{
+	        difference = Integer.parseInt("-"+findDifferenceProper(subtrahend, minuend));
+	      }
+	    }
+		return difference;
+	}
+	public static int findDifferenceProper(int minuend, int subtrahend){
+	    String stMin = Integer.toBinaryString(minuend); 
+	    String stSub = Integer.toBinaryString(subtrahend);
+	
+	    for(;stSub.length() < stMin.length(); stSub = "0" + stSub);
+	
+	    int complement = Integer.parseInt(getComplement(stSub), 2) + 1;
+	    String ans = Integer.toBinaryString(complement+minuend);
+	    return Integer.parseInt(ans.substring(1),2);
+	}
+	public static String getComplement(String N){
+	    String complementString = "";
+	    for(int i = 0; i < N.length(); i++){
+	      char digit = (N.charAt(i) == '1') ? '0' : '1';
+	      complementString += digit;
+	    }
+	    return complementString;
+	}
+}
