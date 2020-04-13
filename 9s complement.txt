@@ -1,0 +1,136 @@
+﻿package test;
+import java.io.*;
+public class Test {
+
+    public static void main(String[] args) throws IOException{
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String fn, sn;
+        
+        //Ask for minuend
+        System.out.print("Input first value: ");
+        fn = in.readLine();
+        //Asd for subtrahend
+        System.out.print("Input second value: ");
+        sn = in.readLine();
+        
+        int ex = 5;
+        while(ex==5){
+            System.out.println("[1]Solve for 9's Complement \n[2]Solve for 10's Complement \n[3]Exit");
+            int c = Integer.parseInt(in.readLine());
+            switch(c){
+                case 1:
+                    System.out.println("");
+                    fC(fn, sn);
+                    break;
+                case 2:
+                    System.out.println("");
+                    fCc(fn, sn);
+                    break;
+                default:
+                    ex = 3;
+                    break;
+            }   
+        }
+    }
+    public static void fC(String fn, String sn){
+        int[] fnn = new int[fn.length()];
+        int[] snn = new int[sn.length()];
+        int[] ffn = new int[sn.length()];
+        
+        //Assign each array element in the variable to an array
+        for(int i = 0; i < fnn.length ; i++){
+            int cn = Integer.parseInt(String.valueOf(fn.charAt(i)));
+            fnn[i] = cn;
+            System.out.print(fnn[i] + " ");
+        }
+        System.out.println("");
+        for(int i = 0; i < snn.length ; i++){
+            int cn = Integer.parseInt(String.valueOf(sn.charAt(i)));
+            System.out.print(cn + " ");
+            snn[i] = (-cn)+9;
+        }
+        System.out.println("\n-------");
+        for(int i:snn){
+            System.out.print(i + " ");
+        }
+        System.out.println("\n-------");
+
+        if(fnn.length > snn.length){
+          //In Progress  
+        }else if(snn.length > fnn.length){
+          //In Progress  
+        }else{
+            //math shiz for 9's Complement
+            int asum = 0;
+            for(int i = fnn.length-1 ; i >= 0 ; i--){
+                int sum = fnn[i] + snn[i] + asum;
+
+                String s = Integer.toString(sum);               
+                if(s.length() >= 2){
+                    asum = Integer.parseInt(String.valueOf(s.charAt(0)));
+                    sum = Integer.parseInt(String.valueOf(s.charAt(1))); 
+                }
+                else{
+                    asum = 0;
+                }
+                if(i==0) ffn[fnn.length-1] = ffn[ffn.length-1]+1;
+                ffn[i] = sum;  
+            }
+            for(int i:ffn){
+                System.out.print(i + " ");
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+    }
+    
+    public static void fCc(String fn, String sn){
+        int[] fnn = new int[fn.length()];
+        int[] snn = new int[sn.length()];
+        int[] ffn = new int[sn.length()];
+        
+        for(int i = 0; i < fnn.length ; i++){
+            int cn = Integer.parseInt(String.valueOf(fn.charAt(i)));
+            fnn[i] = cn;
+            System.out.print(fnn[i] + " ");
+        }
+        System.out.println("");
+        for(int i = 0; i < snn.length ; i++){
+            int cn = Integer.parseInt(String.valueOf(sn.charAt(i)));
+            System.out.print(cn + " ");
+            snn[i] = (-cn)+9;
+            if(i==snn.length-1) snn[i] = (((-cn)+9)+1);
+        }        
+        System.out.println("\n-------");
+        for(int i:snn){
+            System.out.print(i + " ");
+        }
+        System.out.println("\n-------");
+        
+        if(fnn.length > snn.length){
+          //In Progress  
+        }else if(snn.length > fnn.length){
+          //In Progress  
+        }else{
+            int asum = 0;
+            for(int i = fnn.length-1 ; i >= 0 ; i--){
+                int sum = fnn[i] + snn[i] + asum;
+
+                String s = Integer.toString(sum);               
+                if(s.length() >= 2){
+                    asum = Integer.parseInt(String.valueOf(s.charAt(0)));
+                    sum = Integer.parseInt(String.valueOf(s.charAt(1))); 
+                }
+                else{
+                    asum = 0;
+                }
+                ffn[i] = sum;  
+            }
+            for(int i:ffn){
+                System.out.print(i + " ");
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+    }
+}
